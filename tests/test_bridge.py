@@ -269,3 +269,14 @@ async def test_state_reporting(hass: HomeAssistant, aioclient_mock) -> None:
     await hass.async_block_till_done()
     names = [c[2]["event"]["header"]["name"] for c in aioclient_mock.mock_calls[n:] if "amazonalexa" in str(c[1])]
     assert names == ["DeleteReport"], names
+
+
+async def test_cover_power_hidden(hass: HomeAssistant, setup) -> None:
+    cfg = setup.runtime_data
+    resp = await async_handle_directive(hass, cfg, directive("Alexa.Discovery", "Discover"), Context())
+    eps = {e["endpointId"]: e for e in resp["event"]["payload"]["endpoints"]}
+    ifaces = [c["interface"] for c in eps["cover#curtain_alexa"]["capabilities"]]
+    assert "Alexa.PowerController" not in ifaces
+    assert "Alexa.RangeController" in ifaces
+    # lights keep their power switch
+    assert "Alexa.PowerController" in [c["interface"] for c in eps["light#kitchen"]["capabilities"]]

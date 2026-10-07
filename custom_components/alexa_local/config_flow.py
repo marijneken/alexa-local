@@ -35,6 +35,7 @@ from .const import (
     CONF_PERCENT,
     CONF_PRECISION,
     CONF_PRESETS,
+    CONF_HIDE_COVER_POWER,
     CONF_REGION,
     CONF_SOURCE,
     CONF_SOURCE_MAX,
@@ -94,6 +95,10 @@ def _settings_schema(defaults: dict[str, Any]) -> vol.Schema:
                     mode=selector.SelectSelectorMode.DROPDOWN,
                 )
             ),
+            vol.Required(
+                CONF_HIDE_COVER_POWER,
+                default=defaults.get(CONF_HIDE_COVER_POWER, True),
+            ): selector.BooleanSelector(),
         }
     )
 

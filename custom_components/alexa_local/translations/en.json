@@ -12,12 +12,14 @@
           "locale": "Alexa language",
           "client_id": "Skill client ID (Send Alexa Events)",
           "client_secret": "Skill client secret (Send Alexa Events)",
-          "region": "Alexa event region"
+          "region": "Alexa event region",
+          "hide_cover_power": "Hide the on/off switch on covers"
         },
         "data_description": {
           "client_id": "From the skill's Permissions page in the Alexa developer console. Needed for state reporting and automatic device updates.",
           "client_secret": "From the same Permissions page.",
-          "region": "Auto uses the AWS region of the Lambda that calls Home Assistant."
+          "region": "Auto uses the AWS region of the Lambda that calls Home Assistant.",
+          "hide_cover_power": "Curtains and blinds only get the position control in Alexa. \"Open\" and \"close\" keep working."
         }
       }
     }
@@ -31,11 +33,13 @@
           "locale": "Alexa language",
           "client_id": "Skill client ID (Send Alexa Events)",
           "client_secret": "Skill client secret (Send Alexa Events)",
-          "region": "Alexa event region"
+          "region": "Alexa event region",
+          "hide_cover_power": "Hide the on/off switch on covers"
         },
         "data_description": {
           "client_id": "From the skill's Permissions page in the Alexa developer console. Needed for state reporting and automatic device updates.",
-          "region": "Auto uses the AWS region of the Lambda that calls Home Assistant."
+          "region": "Auto uses the AWS region of the Lambda that calls Home Assistant.",
+          "hide_cover_power": "Curtains and blinds only get the position control in Alexa. \"Open\" and \"close\" keep working."
         }
       }
     }

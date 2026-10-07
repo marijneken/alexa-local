@@ -27,9 +27,13 @@ def _ext_class(base: type[AlexaEntity]) -> type[AlexaEntity]:
 
     class Extended(base):  # type: ignore[valid-type, misc]
         _local_controls: tuple = ()
+        _hide_power: bool = False
 
         def interfaces(self) -> Generator[Any]:
-            yield from super().interfaces()
+            for interface in super().interfaces():
+                if self._hide_power and interface.name() == "Alexa.PowerController":
+                    continue
+                yield interface
             for control in self._local_controls:
                 yield MappedRangeCapability(
                     self.hass, self.entity, control, self.config.locale
@@ -43,9 +47,16 @@ def _ext_class(base: type[AlexaEntity]) -> type[AlexaEntity]:
 def _factory(base: type[AlexaEntity]) -> Callable[..., AlexaEntity]:
     def create(hass, config, state) -> AlexaEntity:  # noqa: ANN001
         controls_for = getattr(config, "alexa_local_controls_for", None)
-        if controls_for is not None and (controls := controls_for(state.entity_id)):
+        if controls_for is None:
+            return base(hass, config, state)
+        controls = controls_for(state.entity_id)
+        hide_power = state.domain == "cover" and getattr(
+            config, "alexa_local_hide_cover_power", False
+        )
+        if controls or hide_power:
             entity = _ext_class(base)(hass, config, state)
             entity._local_controls = tuple(controls)  # noqa: SLF001
+            entity._hide_power = hide_power  # noqa: SLF001
             return entity
         return base(hass, config, state)
 

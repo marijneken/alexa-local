@@ -41,6 +41,7 @@ from .const import (
     CONF_INVERT_TILT,
     CONF_LABEL,
     CONF_LOCALE,
+    CONF_HIDE_COVER_POWER,
     CONF_REGION,
     CONF_SOURCE,
     DEFAULT_LABEL,
@@ -88,6 +89,7 @@ class AlexaLocalConfig(AbstractConfig):
         self.label_id: str = data.get(CONF_LABEL) or DEFAULT_LABEL
         self._locale: str = data.get(CONF_LOCALE) or DEFAULT_LOCALE
         self._region_setting: str = data.get(CONF_REGION) or REGION_AUTO
+        self.alexa_local_hide_cover_power: bool = data.get(CONF_HIDE_COVER_POWER, True)
         cid = (data.get(CONF_CLIENT_ID) or "").strip()
         secret = (data.get(CONF_CLIENT_SECRET) or "").strip()
         self._auth: _LocalAuth | None = (

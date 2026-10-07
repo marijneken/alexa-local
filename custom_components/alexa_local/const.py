@@ -10,6 +10,7 @@ CONF_LOCALE: Final = "locale"
 CONF_CLIENT_ID: Final = "client_id"
 CONF_CLIENT_SECRET: Final = "client_secret"
 CONF_REGION: Final = "region"
+CONF_HIDE_COVER_POWER: Final = "hide_cover_power"
 
 DEFAULT_LABEL: Final = "alexa"
 DEFAULT_LOCALE: Final = "en-US"
