@@ -1,0 +1,18 @@
+{
+  "domain": "alexa_local",
+  "name": "Alexa Local",
+  "codeowners": [
+    "@marijneken"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "http"
+  ],
+  "documentation": "https://github.com/marijneken/alexa-local",
+  "integration_type": "service",
+  "iot_class": "cloud_push",
+  "requirements": [],
+  "single_config_entry": true,
+  "version": "0.1.1",
+  "issue_tracker": "https://github.com/marijneken/alexa-local/issues"
+}

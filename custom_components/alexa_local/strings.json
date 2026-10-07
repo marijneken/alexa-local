@@ -1,0 +1,155 @@
+{
+  "config": {
+    "abort": {
+      "single_instance_allowed": "Alexa Local is already set up."
+    },
+    "step": {
+      "user": {
+        "title": "Alexa Local",
+        "description": "Expose Home Assistant to your own Alexa Smart Home skill. Entities (or devices) with the selected label are shared with Alexa.",
+        "data": {
+          "label": "Label that exposes entities to Alexa",
+          "locale": "Alexa language",
+          "client_id": "Skill client ID (Send Alexa Events)",
+          "client_secret": "Skill client secret (Send Alexa Events)",
+          "region": "Alexa event region"
+        },
+        "data_description": {
+          "client_id": "From the skill's Permissions page in the Alexa developer console. Needed for state reporting and automatic device updates.",
+          "client_secret": "From the same Permissions page.",
+          "region": "Auto uses the AWS region of the Lambda that calls Home Assistant."
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Alexa Local settings",
+        "data": {
+          "label": "Label that exposes entities to Alexa",
+          "locale": "Alexa language",
+          "client_id": "Skill client ID (Send Alexa Events)",
+          "client_secret": "Skill client secret (Send Alexa Events)",
+          "region": "Alexa event region"
+        },
+        "data_description": {
+          "client_id": "From the skill's Permissions page in the Alexa developer console. Needed for state reporting and automatic device updates.",
+          "region": "Auto uses the AWS region of the Lambda that calls Home Assistant."
+        }
+      }
+    }
+  },
+  "selector": {
+    "region": {
+      "options": {
+        "auto": "Automatic",
+        "NA": "North America",
+        "EU": "Europe / India",
+        "FE": "Far East / Australia"
+      }
+    }
+  },
+  "config_subentries": {
+    "inverted_cover": {
+      "entry_type": "Inverted cover",
+      "initiate_flow": {
+        "user": "Add inverted cover",
+        "reconfigure": "Edit inverted cover"
+      },
+      "abort": {
+        "entry_not_loaded": "Alexa Local must be loaded first.",
+        "reconfigure_successful": "Saved."
+      },
+      "error": {
+        "already_configured": "This cover already has an inverted proxy."
+      },
+      "step": {
+        "user": {
+          "title": "Inverted cover",
+          "description": "Alexa will see a reversed copy of this cover instead of the cover itself. Expose it by putting the Alexa label on the original cover.",
+          "data": {
+            "source": "Cover",
+            "name": "Name in Alexa (optional)",
+            "invert_position": "Invert position and open/close",
+            "invert_tilt": "Invert tilt"
+          }
+        },
+        "reconfigure": {
+          "title": "Inverted cover",
+          "data": {
+            "source": "Cover",
+            "name": "Name in Alexa (optional)",
+            "invert_position": "Invert position and open/close",
+            "invert_tilt": "Invert tilt"
+          }
+        }
+      }
+    },
+    "mapped_control": {
+      "entry_type": "Mapped control",
+      "initiate_flow": {
+        "user": "Add mapped control",
+        "reconfigure": "Edit mapped control"
+      },
+      "abort": {
+        "entry_not_loaded": "Alexa Local must be loaded first.",
+        "reconfigure_successful": "Saved."
+      },
+      "error": {
+        "no_names": "Enter at least one name.",
+        "source_missing": "That entity has no state right now.",
+        "no_mapping": "Map at least one option."
+      },
+      "step": {
+        "user": {
+          "title": "Mapped control",
+          "description": "Adds an extra control to an Alexa device, e.g. \"Alexa, set the fan swing to 50%\". The control drives a select or number entity.",
+          "data": {
+            "target": "Alexa device (the exposed entity that gets the control)",
+            "names": "Control name(s), comma separated",
+            "source": "Entity the control sets"
+          },
+          "data_description": {
+            "names": "What you say to Alexa, e.g. \"Swing\" or \"Swing, Sweep\"."
+          }
+        },
+        "reconfigure_basics": {
+          "title": "Mapped control",
+          "data": {
+            "target": "Alexa device (the exposed entity that gets the control)",
+            "names": "Control name(s), comma separated",
+            "source": "Entity the control sets"
+          }
+        },
+        "map_options": {
+          "title": "Map options to values",
+          "description": "Give each option of {source} the value Alexa uses for it. Leave a field empty to skip that option. A requested value picks the nearest option.",
+          "data": {
+            "presets": "Also allow option names (\"set swing to wide\")",
+            "percent": "Values are percentages"
+          }
+        },
+        "map_linear": {
+          "title": "Map range",
+          "description": "Alexa's range is scaled linearly onto {source}. Swap min/max to invert.",
+          "data": {
+            "alexa_min": "Alexa minimum",
+            "alexa_max": "Alexa maximum",
+            "source_min": "Entity value at Alexa minimum",
+            "source_max": "Entity value at Alexa maximum",
+            "precision": "Alexa step",
+            "percent": "Values are percentages"
+          }
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "exposed": {
+        "name": "Exposed entities"
+      }
+    }
+  }
+}
